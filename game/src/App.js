@@ -1,7 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
-function App() {
+const App = () => {
+  fetch("http://localhost:3001", {
+    method: "POST",
+  });
   return (
     <div className="App">
       <header className="App-header">
@@ -20,6 +23,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
