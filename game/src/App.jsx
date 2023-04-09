@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 const App = () => {
+  fetch("http://localhost:3001", {
+    method: "POST",
+  });
+  // remplacer mes mots par l'api...
   const words = ["apple", "banana", "orange"];
   const [word, setWord] = useState(
     words[Math.floor(Math.random() * words.length)]
