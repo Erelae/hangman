@@ -20,19 +20,18 @@ const App = () => {
     } else {
       setIncorrectGuesses(incorrectGuesses + 1);
     }
-
-    useEffect(() => {
-      if (incorrectGuesses > 5) {
-        setGameOver(true);
-        setWon(false);
-      }
-
-      if (word.split("").every((letter) => guesses.includes(letter))) {
-        setGameOver(true);
-        setWon(true);
-      }
-    }, [incorrectGuesses, guesses]);
   };
+  useEffect(() => {
+    if (incorrectGuesses > 5) {
+      setGameOver(true);
+      setWon(false);
+    }
+
+    if (word.split("").every((letter) => guesses.includes(letter))) {
+      setGameOver(true);
+      setWon(true);
+    }
+  }, [incorrectGuesses, guesses]);
   const resetGame = () => {
     setWord(words[Math.floor(Math.random() * words.length)]);
     setGuesses([]);
@@ -45,11 +44,18 @@ const App = () => {
       <h1>Hangman</h1>
       {gameOver ? (
         <div>
-          {won ? 'You won!' : 'You lost!'}
+          {won ? "You won!" : "You lost!"}
           <button onClick={() => resetGame()}>Play again!</button>
         </div>
       ) : (
-        
+        <div>
+          <p className="incorrect">Incorrect guesses: {incorrectGuesses}</p>
+          <p className="guess">
+            {word
+              .split("")
+              .map((letter) => (guesses.includes(letter) ? letter : "_"))}
+          </p>
+        </div>
       )}
     </div>
   );
