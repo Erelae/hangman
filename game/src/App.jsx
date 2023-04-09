@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 const App = () => {
@@ -17,7 +17,15 @@ const App = () => {
 
     if (word.includes(guess)) {
       setGuesses([...guesses, guess]);
+    } else {
+      setIncorrectGuesses(incorrectGuesses + 1);
     }
+
+    useEffect(() => {
+      if (incorrectGuesses > 5) {
+        setGameOver(true);
+      }
+    }, [incorrectGuesses, guesses]);
   };
   return (
     <div>
