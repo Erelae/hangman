@@ -32,12 +32,25 @@ const App = () => {
         setWon(true);
       }
     }, [incorrectGuesses, guesses]);
-
-    const resetGame = () => {};
+  };
+  const resetGame = () => {
+    setWord(words[Math.floor(Math.random() * words.length)]);
+    setGuesses([]);
+    setIncorrectGuesses(0);
+    setGameOver(false);
+    setWon(false);
   };
   return (
     <div>
       <h1>Hangman</h1>
+      {gameOver ? (
+        <div>
+          {won ? 'You won!' : 'You lost!'}
+          <button onClick={() => resetGame()}>Play again!</button>
+        </div>
+      ) : (
+        
+      )}
     </div>
   );
 };
