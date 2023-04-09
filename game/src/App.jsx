@@ -24,8 +24,16 @@ const App = () => {
     useEffect(() => {
       if (incorrectGuesses > 5) {
         setGameOver(true);
+        setWon(false);
+      }
+
+      if (word.split("").every((letter) => guesses.includes(letter))) {
+        setGameOver(true);
+        setWon(true);
       }
     }, [incorrectGuesses, guesses]);
+
+    const resetGame = () => {};
   };
   return (
     <div>
