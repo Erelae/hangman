@@ -4,9 +4,9 @@ import "./App.css";
 const App = () => {
   const words = ["apple", "banana", "orange"];
   const [word, setWord] = useState(
-    words(Math.floor(Math.random() * words.length))
+    words[Math.floor(Math.random() * words.length)]
   );
-  const [guesses, setGuesses] = useState;
+  const [guesses, setGuesses] = useState([]);
   const [incorrectGuesses, setIncorrectGuesses] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [won, setWon] = useState(false);
@@ -57,7 +57,9 @@ const App = () => {
           </p>
           <p className="buttons">
             {"abcdefghijklmopqrstuvwxyz".split("").map((letter) => (
-              <button key={letter} onClick={() => handleGuess(letter)}></button>
+              <button key={letter} onClick={() => handleGuess(letter)}>
+                {letter}
+              </button>
             ))}
           </p>
         </div>
