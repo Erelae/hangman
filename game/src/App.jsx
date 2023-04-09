@@ -10,15 +10,7 @@ const App = () => {
   const [won, setWon] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:3001", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        /* mettre les données JSON ici si nécessaire */
-      }),
-    })
+    fetch("http://localhost:3001")
       .then((response) => response.json())
       .then((data) => setWords(data.words))
       .catch((error) => console.error(error));
