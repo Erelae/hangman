@@ -2,18 +2,33 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 const App = () => {
-  fetch("http://localhost:3001", {
-    method: "POST",
-  });
-  // remplacer mes mots par l'api...
-  const words = ["apple", "banana", "orange"];
-  const [word, setWord] = useState(
-    words[Math.floor(Math.random() * words.length)]
-  );
+  const [words, setWords] = useState([]);
+  const [word, setWord] = useState("");
   const [guesses, setGuesses] = useState([]);
   const [incorrectGuesses, setIncorrectGuesses] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [won, setWon] = useState(false);
+
+  useEffect(() => {
+    fetch("http://localhost:3001", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        /* mettre les données JSON ici si nécessaire */
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => setWords(data.words))
+      .catch((error) => console.error(error));
+  }, []);
+
+  useEffect(() => {
+    if (words.length > 0) {
+      setWord(words[Math.floor(Math.random() * words.length)]);
+    }
+  }, [words]);
 
   const handleGuess = (guess) => {
     if (gameOver) return;
@@ -25,6 +40,7 @@ const App = () => {
       setIncorrectGuesses(incorrectGuesses + 1);
     }
   };
+
   useEffect(() => {
     if (incorrectGuesses > 5) {
       setGameOver(true);
@@ -35,7 +51,8 @@ const App = () => {
       setGameOver(true);
       setWon(true);
     }
-  }, [incorrectGuesses, guesses]);
+  }, [incorrectGuesses, guesses, word]);
+
   const resetGame = () => {
     setWord(words[Math.floor(Math.random() * words.length)]);
     setGuesses([]);
@@ -43,6 +60,7 @@ const App = () => {
     setGameOver(false);
     setWon(false);
   };
+
   return (
     <div>
       <h1>Hangman</h1>
