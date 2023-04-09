@@ -55,6 +55,11 @@ const App = () => {
               .split("")
               .map((letter) => (guesses.includes(letter) ? letter : "_"))}
           </p>
+          <p className="buttons">
+            {"abcdefghijklmopqrstuvwxyz".split("").map((letter) => (
+              <button key={letter} onClick={() => handleGuess(letter)}></button>
+            ))}
+          </p>
         </div>
       )}
     </div>
